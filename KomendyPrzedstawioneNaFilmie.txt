@@ -1,0 +1,37 @@
+set pozyczkodawca = ##class(User.Pozyczkodawca).%New()
+set pozyczkodawca.Nazwa="SkokStefczyka"
+set pozyczkodawca.Adres="Warszawa"
+zwrite pozyczkodawca
+set k=##class(User.Konto).%New()
+set pozyczkobiorca = ##class(User.Pozyczkobiorca).%New()
+set pozyczkobiorca.Imie = "Rafal"
+set pozyczkobiorca.Nazwisko="Guzek"
+set pozyczkobiorca.Pesel="12345678911"
+zwrite pozyczkobiorca
+set konto = ##class(User.Konto).%New()
+set konto.Pozyczkodawca=pozyczkodawca
+set konto.WlascicielKonta=pozyczkobiorca
+set pozyczka1=##class(User.StaleOprocentowanie).%New()
+set pozyczka1.Czas=10
+set pozyczka1.Suma=5000
+set pozyczka1.Procent=0.20
+zwrite pozyczka1
+do konto.dodajPozyczke(pozyczka1)
+zwrite pozyczka1.naleznosc() 
+set pozyczka2=##class(User.ZmienneOprocentowanie).%New()
+set pozyczka2.Suma=5000
+do konto.dodajPozyczke(pozyczka2)
+set p1=##class(User.WyliczenieZmienne).%New()
+set p1.Rok=1
+set p1.RRSO=0.10
+set p2=##class(User.WyliczenieZmienne).%New()
+set p2.Rok=1
+set p2.RRSO=0.20
+set p3=##class(User.WyliczenieZmienne).%New()
+set p3.Rok=1
+set p3.RRSO=0.30
+do pozyczka2.dodaj(p1)
+do pozyczka2.dodaj(p2)
+do pozyczka2.dodaj(p3)
+zwrite pozyczka2.naleznosc()
+zwrite konto.calkowitaNaleznosc()

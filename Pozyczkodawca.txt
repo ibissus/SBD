@@ -1,0 +1,28 @@
+Class User.Pozyczkodawca Extends (%Persistent, %Populate)
+{
+Property Nazwa As %String;
+Property Adres As %String;
+Relationship Konta As User.Konto [ Cardinality = children, Inverse = Pozyczkodawca ];
+
+Storage Default
+{
+<Data name="PozyczkodawcaDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Nazwa</Value>
+</Value>
+<Value name="3">
+<Value>Adres</Value>
+</Value>
+</Data>
+<DataLocation>^User.PozyczkodawcaD</DataLocation>
+<DefaultData>PozyczkodawcaDefaultData</DefaultData>
+<IdLocation>^User.PozyczkodawcaD</IdLocation>
+<IndexLocation>^User.PozyczkodawcaI</IndexLocation>
+<StreamLocation>^User.PozyczkodawcaS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

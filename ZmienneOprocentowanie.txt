@@ -1,0 +1,48 @@
+Class User.ZmienneOprocentowanie Extends (%Persistent, %Populate, 
+%XML.Adaptor, %ZEN.DataModel.Adaptor, User.Pozyczka)
+{
+
+Property Procenty As list Of WyliczenieZmienne;
+Method naleznosc() As %Float
+{
+	set d = ..Suma
+	for i=1:1:..Procenty.Count(){
+	set b = ..Procenty.GetAt(i).Rok
+	set c = ..Procenty.GetAt(i).RRSO
+	set d = d + (d*b*c) 
+	}
+	return d-..Suma
+}
+Method dodaj(input As User.WyliczenieZmienne)
+{
+	Do ..Procenty.Insert(input)
+}
+
+Storage Default
+{
+<Data name="ZmienneOprocentowanieDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Czas</Value>
+</Value>
+<Value name="3">
+<Value>Suma</Value>
+</Value>
+<Value name="4">
+<Value>Procent</Value>
+</Value>
+<Value name="5">
+<Value>Procenty</Value>
+</Value>
+</Data>
+<DataLocation>^User.ZmienneOprocentowanieD</DataLocation>
+<DefaultData>ZmienneOprocentowanieDefaultData</DefaultData>
+<IdLocation>^User.ZmienneOprocentowanieD</IdLocation>
+<IndexLocation>^User.ZmienneOprocentowanieI</IndexLocation>
+<StreamLocation>^User.ZmienneOprocentowanieS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

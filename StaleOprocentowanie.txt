@@ -1,0 +1,37 @@
+Class User.StaleOprocentowanie Extends (%Persistent, %Populate, %SerialObject, 
+%XML.Adaptor, %ZEN.DataModel.Adaptor, User.Pozyczka)
+{
+Property Procent As %Float;
+Method naleznosc() As %Float
+{
+	set a = ..Czas
+	set b = ..Procent
+	set c = (..Suma*a*b)+..Suma
+	return c
+}
+
+Storage Default
+{
+<Data name="StaleOprocentowanieDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Czas</Value>
+</Value>
+<Value name="3">
+<Value>Suma</Value>
+</Value>
+<Value name="4">
+<Value>Procent</Value>
+</Value>
+</Data>
+<DataLocation>^User.StaleOprocentowanieD</DataLocation>
+<DefaultData>StaleOprocentowanieDefaultData</DefaultData>
+<IdLocation>^User.StaleOprocentowanieD</IdLocation>
+<IndexLocation>^User.StaleOprocentowanieI</IndexLocation>
+<StreamLocation>^User.StaleOprocentowanieS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

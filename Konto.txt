@@ -1,0 +1,40 @@
+Class User.Konto Extends (%Persistent, %Populate, %XML.Adaptor, %ZEN.DataModel.Adaptor)
+{
+Property Pozyczki As list Of User.Pozyczka [ Required ];
+Relationship WlascicielKonta As User.Pozyczkobiorca [ Cardinality = one, Inverse = Konto ];
+Relationship Pozyczkodawca As User.Pozyczkodawca [ Cardinality = parent, Inverse = Konta ];
+Method calkowitaNaleznosc() As %Float [ Final ]
+{
+	set calkowita=0
+	for i=1:1:..Pozyczki.Count(){
+		set calkowita= calkowita + ..Pozyczki.GetAt(i).naleznosc()
+	}
+	return calkowita
+}
+Method dodajPozyczke(input As User.Pozyczka)
+{
+	Do ..Pozyczki.Insert(input)
+}
+
+Storage Default
+{
+<Data name="KontoDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Pozyczki</Value>
+</Value>
+<Value name="3">
+<Value>WlascicielKonta</Value>
+</Value>
+</Data>
+<DataLocation>^User.KontoD</DataLocation>
+<DefaultData>KontoDefaultData</DefaultData>
+<IdLocation>^User.KontoD</IdLocation>
+<IndexLocation>^User.KontoI</IndexLocation>
+<StreamLocation>^User.KontoS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}

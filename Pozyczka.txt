@@ -1,0 +1,10 @@
+Class User.Pozyczka [ Abstract ]
+{
+Property Czas As %Integer;
+Property Suma As %Float;
+
+Method naleznosc(kwota As %Float) As %Float
+{
+}
+
+}

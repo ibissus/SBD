@@ -1,0 +1,28 @@
+Class User.WyliczenieZmienne Extends (%Persistent, %Populate, %SerialObject, 
+%XML.Adaptor, %ZEN.DataModel.Adaptor)
+{
+Property Rok As %Integer;
+Property RRSO As %Float;
+
+Storage Default
+{
+<Data name="WyliczenieZmienneDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Rok</Value>
+</Value>
+<Value name="3">
+<Value>RRSO</Value>
+</Value>
+</Data>
+<DataLocation>^User.WyliczenieZmienneD</DataLocation>
+<DefaultData>WyliczenieZmienneDefaultData</DefaultData>
+<IdLocation>^User.WyliczenieZmienneD</IdLocation>
+<IndexLocation>^User.WyliczenieZmienneI</IndexLocation>
+<StreamLocation>^User.WyliczenieZmienneS</StreamLocation>
+<Type>%Library.CacheStorage</Type>
+}
+
+}
